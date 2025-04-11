@@ -1,0 +1,11 @@
+<RCC>
+  <qresource prefix="/img">
+    <file alias="logo.png">data/img/logo.png</file>
+  </qresource>
+  <qresource prefix="/help">
+    <file alias="fr.html">data/help/fr.html</file>
+  </qresource>
+  <qresource prefix="/font">
+    <file alias="fontawesome-webfont.ttf">data/font/fontawesome-webfont.ttf</file>
+  </qresource>
+</RCC>

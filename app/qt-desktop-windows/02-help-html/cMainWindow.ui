@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>cMainWindow</class>
+ <widget class="QMainWindow" name="cMainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>409</width>
+    <height>176</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>ReadySCOPE - Oscilloscope numérique</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/img/logo.png</normaloff>:/img/logo.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QGridLayout" name="gridLayout"/>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>409</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuAbout">
+    <property name="title">
+     <string>A propos</string>
+    </property>
+    <addaction name="actionHelpApp"/>
+    <addaction name="actionAboutApp"/>
+    <addaction name="actionAboutQt"/>
+   </widget>
+   <addaction name="menuAbout"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionCloseApplication">
+   <property name="text">
+    <string>Fermer l'application</string>
+   </property>
+  </action>
+  <action name="actionOpenConnection">
+   <property name="text">
+    <string>Ouvrir une connexion port série</string>
+   </property>
+  </action>
+  <action name="actionSaveConfigurtation">
+   <property name="text">
+    <string>Enregistrer une configuration</string>
+   </property>
+  </action>
+  <action name="actionSaveData">
+   <property name="text">
+    <string>Enregistrer les données</string>
+   </property>
+  </action>
+  <action name="actionClearData">
+   <property name="text">
+    <string>Nettoyer les données</string>
+   </property>
+  </action>
+  <action name="actionStop">
+   <property name="text">
+    <string>Arrêter</string>
+   </property>
+  </action>
+  <action name="actionInitPort">
+   <property name="text">
+    <string>Initialiser</string>
+   </property>
+  </action>
+  <action name="actionDisplayConnection">
+   <property name="text">
+    <string>Afficher la liste des connexions port série</string>
+   </property>
+  </action>
+  <action name="actionHelpApp">
+   <property name="text">
+    <string>Afficher l'aide de l'application</string>
+   </property>
+  </action>
+  <action name="actionAboutApp">
+   <property name="text">
+    <string>A propos de l'application</string>
+   </property>
+  </action>
+  <action name="actionAboutQt">
+   <property name="text">
+    <string>A propos de Qt</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>actionCloseApplication</sender>
+   <signal>triggered()</signal>
+   <receiver>cMainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>188</x>
+     <y>103</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

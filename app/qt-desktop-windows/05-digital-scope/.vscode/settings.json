@@ -1,0 +1,20 @@
+{
+    "cmake.environment": {
+        "PATH": "C:/tools/Qt/6.9.0/msvc2022_64/bin"
+    },
+    "files.associations": {
+        "qapplication": "cpp",
+        "qvector": "cpp",
+        "qmap": "cpp",
+        "qimage": "cpp",
+        "qwidget": "cpp",
+        "qmessagebox": "cpp",
+        "qscreen": "cpp",
+        "qmenu": "cpp",
+        "qpaintevent": "cpp",
+        "qpainter": "cpp",
+        "qmainwindow": "cpp",
+        "qresizeevent": "cpp",
+        "qcolordialog": "cpp"
+    },
+}

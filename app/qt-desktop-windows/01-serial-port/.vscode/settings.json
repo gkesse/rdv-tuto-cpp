@@ -1,0 +1,12 @@
+{
+    "cmake.environment": {
+        "PATH": "C:/tools/Qt/6.9.0/msvc2022_64/bin"
+    },
+    "files.associations": {
+        "qapplication": "cpp",
+        "qmap": "cpp",
+        "qvector": "cpp",
+        "qserialport": "cpp",
+        "qwidget": "cpp"
+    },
+}

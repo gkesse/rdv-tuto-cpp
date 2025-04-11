@@ -1,0 +1,143 @@
+<h3 align="center" name="#home">ReadySCOPE</h3>
+
+<p>
+ReadySCOPE est un oscilloscope numérique pour le streaming de données texte ou binaires via TCP, ports série et Bluetooth RFCOMM.
+Il offre un rendu flexible et un format de streaming binaire ou texte hautement configurable.
+</p>
+
+<h4>
+<span style="font-family:FontAwesome;color:darkblue;">&#xf069;</span>
+Sources de données et visualisation
+</h4>
+
+<p>
+Les sources de données de signal incluent les sources TCP/IP, les ports série (USB ou matériel) et les périphériques Bluetooth RFCOMM.
+La syntaxe permettant de spécifier la source de données est expliquée dans la section <a href="#display">Périphérique d'entrée</a> ci-dessous.
+</p>
+
+<p>
+Les données entrantes peuvent être au format texte brut ou au format binaire.
+La syntaxe permettant de spécifier le format des données entrantes est expliquée dans la section <a href="#formatbinary">Format binaire</a> ci-dessous.
+Lorsque le champ de format binaire est vide, le format texte brut est utilisé. Consultez la section <a href="#formattext">Format texte</a> ci-dessous.
+</p>
+
+<p>
+Par défaut, un seul scope est utilisé pour chaque trace de signal.
+Cependant, le nombre de scopes affichés et les signaux qu'ils restituent peuvent être configurés librement, avec par exemple plusieurs traces par scope.
+Ceci est expliqué dans la section <a href="#display">Format d'affichage</a> ci-dessous.
+</p>
+
+<p>
+Afin d'économiser la mémoire, les données entrantes sont stockées dans un tampon de décalage : seuls les N échantillons de données les plus récents sont conservés pour la visualisation.
+
+N est par défaut égal à 10 000.
+</p>
+
+<h4>
+<span style="font-family:FontAwesome;color:darkblue;">&#xf069;</span>
+<a name="display">Format d'affichage</a>
+</h4>
+
+Le mode d'affichage des traces de signal est spécifié par une chaîne de format d'affichage.
+Cette chaîne indique le nombre de scopes affichés et les traces qu'ils doivent afficher.
+La syntaxe est : <i>&lt;title;traces[;xscale=xs][;yscale=auto|min max][;color=colors]&gt;&lt;......</i>
+<ul>
+<li>title : titre de la portée</li>
+<li>traces : liste des traces à afficher, séparées par des espaces (0 = première trace, ...)</li>
+<li>xscale : échelle horizontale. 1 = par défaut. Valeur positive : zoom avant. Valeur négative : zoom arrière.</li>
+<li>yscale : échelle verticale. Automatique (auto) ou manuel (min max)</li>
+<li>couleurs : liste de couleurs de traces séparées par des espaces au format hexadécimal RRGGBB</li>
+</ul>
+Par exemple, la chaîne de format d'affichage suivante : <i>Calibré ; 5 6 7 ; xscale=1 ; yscale=-3300 3300 ; color=ff0000 ff00 ff></i><i>Brut ; 2 3 4 ; xscale=-2 ; yscale=auto ; color=ff0000 ff00 ff></i>
+affiche deux oscilloscopes. Le premier affiche les traces 5, 6 et 7, en rouge, vert et bleu respectivement, avec une échelle verticale manuelle, une échelle horizontale par défaut et le titre « Calibré ».
+
+<h4>
+<span style="font-family:FontAwesome;color:darkblue;">&#xf069;</span>
+<a name="formattext">Format texte</a>
+</h4>
+
+<p>
+Les données sont au format texte brut, avec une ligne par échantillon et une colonne par canal. Les colonnes peuvent être délimitées par l'un des séparateurs suivants : espace, deux-points, point-virgule ou tabulation.
+</p>
+<p>
+Tous les canaux doivent toujours être spécifiés.
+Autrement dit, il n'existe pas de canal « vide ». Si plusieurs séparateurs se suivent sans numéro, ils sont ignorés.
+Notez que cela diffère du format CSV qui autorise les champs « vides ».
+Les canaux « vides » peuvent être spécifiés en utilisant des valeurs « NaN ». Actuellement, un NaN est interprété comme un zéro.
+</p>
+
+<h4>
+<span style="font-family:FontAwesome;color:darkblue;">&#xf069;</span>
+<a name="formatbinary">Format binaire</a>
+</h4>
+
+Le format de la source de données est soit texte, soit binaire, et est décrit par une chaîne de format binaire.
+Une chaîne de format binaire vide signifie que les données entrantes sont du texte brut. Chaque ligne représente un échantillon et les données sont séparées par un espace, une tabulation, deux-points ou un point-virgule.
+Le format binaire se compose d'un en-tête suivi de données binaires brutes.
+Pour spécifier le format des données et l'en-tête, la chaîne de format suivante est utilisée : <i>HEADER;C0FMT C1FMT C2FMT....[;checksum]</i>
+<ul>
+<li>HEADER : en-tête en texte brut indiquant le début des données</li>
+<li>CxFMT : format du canal de données x. Le format est <i>[-]c|s|S|i|I|b<n>|B<n></i> où c, s|S, i|I, b|B indiquent un canal de 8, 16, 32 ou n bits.
+s, i et b sont des valeurs petit-boutiste. S, I et B sont des valeurs gros-boutiste. Le préfixe facultatif - indique un canal de données signé.</li>
+<li>checksum : somme de contrôle facultative. Le format est : x, f ou F. f/F est une somme de contrôle Fletcher-16 16 bits (petit/gros-boutiste). x est un contrôle de redondance longitudinale sur 8 bits.
+</li>
+</ul>
+
+<h4>
+<span style="font-family:FontAwesome;color:darkblue;">&#xf069;</span>
+Périphérique d'entrée
+</h4>
+
+Le périphérique d'entrée peut être une source de données TCP/IP, un port série (USB ou série matériel) ou un périphérique Bluetooth RFCOMM.
+Sa spécification est la suivante :
+<ul>
+<li>TCP/IP : <i>tcp:host:port</i></li>
+<li>Série : <i>ser:device:baudrate</i></li>
+<li>Bluetooth : <i>bt:macaddress</i></li>
+</ul>
+Le périphérique série est au format COMx sous Windows ou /dev/ttyxxxx sous Linux.
+L'adresse MAC d'un périphérique Bluetooth est une chaîne de 12 chiffres hexadécimaux, sans le séparateur deux-points.
+
+<h4>
+<span style="font-family:FontAwesome;color:darkblue;">&#xf069;</span>
+Interface utilisateur
+</h4>
+
+Les portées peuvent être sélectionnées, mises à l'échelle et agrandies à l'aide de la souris.
+
+<ul>
+<li>Clic gauche : sélectionner une portée</li>
+<li>Clic droit : agrandir la portée sélectionnée</li>
+<li>Molette haut/bas : zoom vertical.</li>
+<li>Clic central : échelle verticale automatique.</li>
+<li>Maj+molette haut/bas : zoom horizontal.</li>
+<li>Maj+clic central : échelle horizontale par défaut.</li>
+</ul>
+
+Les traces de portée peuvent être enregistrées dans un fichier (bouton « Enregistrer les données »). Utilisez le bouton « Effacer les données » pour effacer les traces de portée.
+
+<h4>
+<span style="font-family:FontAwesome;color:darkblue;">&#xf069;</span>
+Ligne de commande
+</h4>
+
+Les paramètres de ligne de commande sont : <i>-c -f fichier</i>.<br>
+-f spécifie un fichier de configuration à charger au démarrage. -c se connecte automatiquement à l'appareil (généralement utilisé avec -c).
+
+<h4>
+<span style="font-family:FontAwesome;color:darkblue;">&#xf069;</span>
+Historique
+</h4>
+
+<ul>
+<li>1.10 : Ajout de Bluetooth RFCOMM ; ajout de la vue terminal ; refonte de l'interface utilisateur pour les appareils mobiles.</li>
+<li>1.09 : Ajout de la possibilité d'envoyer des messages d'une ligne à un appareil distant.</li>
+<li>1.08 : Conversion vers Qt5 ; correction de la réception des données en mode texte (auparavant, le cas où des lignes partielles étaient reçues par readAll n'était pas géré, ce qui pouvait entraîner des modifications du nombre de canaux à l'exécution).</li>
+</ul>
+
+<p align="center">
+Produit par <a href="https://readydev.ovh/home">ReadyDEV</a> <br>
+<span style="font-family:FontAwesome;color:darkblue;">&#xf20e;</span>
+Plateforme de Développement Continu
+<span style="font-family:FontAwesome;color:darkblue;">&#xf20e;</span>
+</p>

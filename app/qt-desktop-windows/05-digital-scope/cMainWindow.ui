@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>cMainWindow</class>
+ <widget class="QMainWindow" name="cMainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>419</width>
+    <height>305</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>ReadySCOPE - Oscilloscope numérique</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/img/logo.png</normaloff>:/img/logo.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <property name="leftMargin">
+     <number>9</number>
+    </property>
+    <property name="topMargin">
+     <number>9</number>
+    </property>
+    <property name="rightMargin">
+     <number>9</number>
+    </property>
+    <property name="bottomMargin">
+     <number>9</number>
+    </property>
+    <item row="0" column="0">
+     <widget class="QStackedWidget" name="stackedWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="pageHome"/>
+      <widget class="QWidget" name="pagePlot">
+       <layout class="QGridLayout" name="gridLayout_2">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item row="0" column="0">
+         <widget class="cPlot" name="plot" native="true"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="pageManagePlot">
+       <layout class="QGridLayout" name="gridLayout_3">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <item row="0" column="0">
+         <widget class="QTableWidget" name="tableWidget">
+          <column>
+           <property name="text">
+            <string>Id</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>X</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Y</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Width</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Height</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>nDivision</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Actions</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>419</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuGeneral">
+    <property name="title">
+     <string>Général</string>
+    </property>
+    <addaction name="actionChangeBackgroundColor"/>
+    <addaction name="actionAddPlot"/>
+    <addaction name="actionPlotPage"/>
+    <addaction name="actionManagePlotPage"/>
+    <addaction name="actionCloseApplication"/>
+   </widget>
+   <addaction name="menuGeneral"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionCloseApplication">
+   <property name="text">
+    <string>Fermer l'application</string>
+   </property>
+  </action>
+  <action name="actionLoadSettings">
+   <property name="text">
+    <string>Charger les configurations</string>
+   </property>
+  </action>
+  <action name="actionSaveConfigurtation">
+   <property name="text">
+    <string>Enregistrer une configuration</string>
+   </property>
+  </action>
+  <action name="actionSaveData">
+   <property name="text">
+    <string>Enregistrer les données</string>
+   </property>
+  </action>
+  <action name="actionClearData">
+   <property name="text">
+    <string>Nettoyer les données</string>
+   </property>
+  </action>
+  <action name="actionStop">
+   <property name="text">
+    <string>Arrêter</string>
+   </property>
+  </action>
+  <action name="actionInitPort">
+   <property name="text">
+    <string>Initialiser</string>
+   </property>
+  </action>
+  <action name="actionDisplayConnection">
+   <property name="text">
+    <string>Afficher la liste des connexions port série</string>
+   </property>
+  </action>
+  <action name="actionHomePage">
+   <property name="text">
+    <string>Afficher la page d'accueil</string>
+   </property>
+  </action>
+  <action name="actionChangeBackgroundColor">
+   <property name="text">
+    <string>Changer la couleur de fond</string>
+   </property>
+  </action>
+  <action name="actionSettingsPage">
+   <property name="text">
+    <string>Afficher les configurations</string>
+   </property>
+  </action>
+  <action name="actionAddPlot">
+   <property name="text">
+    <string>Ajouter un oscilloscope</string>
+   </property>
+  </action>
+  <action name="actionPlotPage">
+   <property name="text">
+    <string>Afficher les oscilloscopes</string>
+   </property>
+  </action>
+  <action name="actionManagePlotPage">
+   <property name="text">
+    <string>Gérer les oscilloscopes</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>cPlot</class>
+   <extends>QWidget</extends>
+   <header>cPlot.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>actionCloseApplication</sender>
+   <signal>triggered()</signal>
+   <receiver>cMainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>188</x>
+     <y>103</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
