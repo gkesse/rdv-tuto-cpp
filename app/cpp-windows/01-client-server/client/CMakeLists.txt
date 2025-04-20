@@ -6,6 +6,7 @@ add_executable(rdvcpp
     cClient.cpp
     cClientInit.cpp
     cClientSocket.cpp
+    cErrorMsg.cpp
 )
 
 target_link_libraries(${PROJECT_NAME}

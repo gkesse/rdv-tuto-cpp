@@ -63,6 +63,10 @@
         "xtr1common": "cpp",
         "xutility": "cpp",
         "fstream": "cpp",
-        "sstream": "cpp"
+        "sstream": "cpp",
+        "chrono": "cpp",
+        "filesystem": "cpp",
+        "forward_list": "cpp",
+        "iomanip": "cpp"
     }
 }

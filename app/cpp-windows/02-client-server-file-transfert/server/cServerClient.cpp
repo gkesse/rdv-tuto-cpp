@@ -1,11 +1,15 @@
 #include "cServerClient.h"
-#include "cFile.h"
+#include "cFTP.h"
+#include "cString.h"
+#include "cErrorMsg.h"
 #include <iostream>
 
-static const int DEF_WINSOCK_ERROR_MSG_LENGTH = 512;
+// winsock2
 static const int DEF_WINSOCK_BUFFER_SIZE = 1024;
 static const int DEF_WINSOCK_BUFFER_MAX = 1 * 1024 * 1024; // 1 Mo
-static const std::string DEF_OUTPUT_FILENAME = "../../data/output/output.txt";
+
+// limit
+static const int DEF_REQUEST_LIMIT_SIZE = 100;
 
 cServerClient::cServerClient(SOCKET _socket)
     : m_socket(_socket)
@@ -20,18 +24,34 @@ cServerClient::~cServerClient()
 void cServerClient::run()
 {
     std::string oRequest;
-    std::string oResponse = "Un probleme a ete rencontre.";
+    std::string oResponse;
+    cFTP::sFTP aFTP;
 
     if (recvData(oRequest))
     {
-        cFile oFile(DEF_OUTPUT_FILENAME);
-        oFile.writeText(oRequest);
-        oResponse = "Votre requete a ete traite avec succes.";
+        cFTP oFTP;
+        if (oFTP.saveFile(oRequest, aFTP))
+        {
+            oResponse = "Votre requete a ete traite avec succes.";
+        }
+        else
+        {
+            oResponse = "Le chargement du fichier a echoue.";
+        }
+    }
+    else
+    {
+        oResponse = "Un probleme a ete rencontre.";
     }
 
     sendData(oResponse);
 
-    std::cout << "[Client] : DEF_OUTPUT_FILENAME=" << DEF_OUTPUT_FILENAME << std::endl;
+    std::cout << "[Client] : ================================" << std::endl;
+    std::cout << "[Client] : sFTP.path=" << aFTP.path << std::endl;
+    std::cout << "[Client] : sFTP.filename=" << aFTP.filename << std::endl;
+    std::cout << "[Client] : sFTP.size=" << aFTP.size << std::endl;
+    std::cout << "[Client] : sFTP.data.size()=" << aFTP.data.size() << std::endl;
+    std::cout << "[Client] : sFTP.data=" << cString(aFTP.data).limit(DEF_REQUEST_LIMIT_SIZE).oneLine() << std::endl;
     std::cout << "[Server] : " << oResponse << std::endl;
 }
 
@@ -46,12 +66,12 @@ bool cServerClient::recvData(std::string &_request)
         {
             std::cout << "La reception des donnees du point de terminaison a echoue."
                       << "|errorCode=" << GetLastError()
-                      << "|errorMsg=" << getLastError(GetLastError())
+                      << "|errorMsg=" << getLastErrorMsg(GetLastError())
                       << std::endl;
             return false;
         }
-        oBuffer[oBytes] = '\0';
-        oRequest += oBuffer;
+
+        oRequest.append(oBuffer, oBytes);
 
         if (oRequest.size() >= DEF_WINSOCK_BUFFER_MAX)
         {
@@ -68,7 +88,7 @@ bool cServerClient::recvData(std::string &_request)
         {
             std::cout << "La lecture du nombre de donnees restantes sur le point de terminaison a echoue."
                       << "|errorCode=" << GetLastError()
-                      << "|errorMsg=" << getLastError(GetLastError())
+                      << "|errorMsg=" << getLastErrorMsg(GetLastError())
                       << std::endl;
             return false;
         }
@@ -89,27 +109,9 @@ bool cServerClient::sendData(const std::string &_response)
     {
         std::cout << "La reception des donnees du point de terminaison a echoue."
                   << "|errorCode=" << GetLastError()
-                  << "|errorMsg=" << getLastError(GetLastError())
+                  << "|errorMsg=" << getLastErrorMsg(GetLastError())
                   << std::endl;
         return false;
     }
     return true;
-}
-
-std::string cServerClient::getLastError(int _error) const
-{
-    char oErrorMsg[DEF_WINSOCK_ERROR_MSG_LENGTH] = {0};
-    int oLength = FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
-                                NULL,
-                                _error,
-                                MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-                                oErrorMsg,
-                                sizeof(oErrorMsg),
-                                NULL);
-    if (oLength > 0)
-    {
-        oErrorMsg[oLength - 1] = 0;
-    }
-    std::string oMessage = oErrorMsg;
-    return oMessage;
 }

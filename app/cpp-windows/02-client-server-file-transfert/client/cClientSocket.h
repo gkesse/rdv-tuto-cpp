@@ -15,7 +15,6 @@ private:
 private:
     bool recvData(std::string &_response);
     bool sendData(const std::string &_request);
-    std::string getLastError(int _error) const;
 
 private:
     SOCKET m_socket;

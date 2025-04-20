@@ -7,9 +7,7 @@ static const int DEF_WINSOCK_MAJOR_VERSION = 2;
 static const int DEF_WINSOCK_MINOR_VERSION = 2;
 static const int DEF_WINSOCK_ERROR_MSG_LENGTH = 512;
 
-cServer::cServer(int _argc, char **_argv)
-    : m_argc(_argc),
-      m_argv(_argv)
+cServer::cServer()
 {
 }
 

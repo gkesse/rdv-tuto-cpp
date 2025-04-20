@@ -1,32 +1,12 @@
-#include "cClient.h"
-#include "cFile.h"
-#include <iostream>
+#include "cFTP.h"
 
-static const std::string DEF_INPUT_FILENAME = "../../data/input/input.txt";
+static const std::string DEF_INPUT_CV_FILE = "../../data/input/cv.txt";
+static const std::string DEF_INPUT_IMAGE_FILE = "../../data/input/cpp.png";
 
 int main(int _argc, char **_argv)
 {
-    cClient oClient(_argc, _argv);
-
-    cFile oFile(DEF_INPUT_FILENAME);
-    std::string oRequest;
-
-    if (oFile.exitsFile())
-    {
-        oRequest = oFile.readBin();
-    }
-    else
-    {
-        oRequest = "Erreur lors du chargement du fichier";
-    }
-
-    std::string oResponse;
-
-    if (oClient.run(oRequest, oResponse))
-    {
-        std::cout << "[Client] : DEF_INPUT_FILENAME=" << DEF_INPUT_FILENAME << std::endl;
-        std::cout << "[Server] : " << oResponse << std::endl;
-    }
-
+    cFTP oFTP;
+    oFTP.sendFile(DEF_INPUT_CV_FILE);
+    oFTP.sendFile(DEF_INPUT_IMAGE_FILE);
     return 0;
 }

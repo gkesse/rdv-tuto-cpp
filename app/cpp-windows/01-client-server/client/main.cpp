@@ -3,7 +3,7 @@
 
 int main(int _argc, char **_argv)
 {
-    cClient oClient(_argc, _argv);
+    cClient oClient;
 
     std::string oRequest("Bonjour tout le monde");
     std::string oResponse;

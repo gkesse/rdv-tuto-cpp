@@ -10,7 +10,4 @@ private:
     explicit cClientInit();
     ~cClientInit();
     bool run(const std::string &_request, std::string &_response) const;
-
-private:
-    std::string getLastError(int _error) const;
 };

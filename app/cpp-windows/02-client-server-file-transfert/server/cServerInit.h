@@ -10,7 +10,4 @@ private:
     explicit cServerInit();
     ~cServerInit();
     void run();
-
-private:
-    std::string getLastError(int _error) const;
 };
