@@ -1,6 +1,6 @@
 # Introduction
 
-![intro.png](data/img/intro.png "Tutoriels C++")
+![intro.png](data/img/intro.png)
 
 # Contacts
 
