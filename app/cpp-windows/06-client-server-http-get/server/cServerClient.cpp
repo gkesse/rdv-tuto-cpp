@@ -9,7 +9,7 @@ static const int DEF_WINSOCK_BUFFER_SIZE = 1024;
 static const int DEF_WINSOCK_BUFFER_MAX = 1 * 1024 * 1024; // 1 Mo
 
 // limit
-static const int DEF_DATA_LIMIT_SIZE = 100;
+static const int DEF_DATA_LIMIT_SIZE = 50;
 
 cServerClient::cServerClient(SOCKET _socket)
     : m_socket(_socket)

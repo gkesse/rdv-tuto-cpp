@@ -3,7 +3,7 @@
 #include "cHttpStatusCode.h"
 #include <string>
 
-class cHTTP : public std::string
+class cHTTP
 {
 public:
     struct sRequest

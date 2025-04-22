@@ -2,7 +2,7 @@
 
 #include <string>
 
-class cHTTP : public std::string
+class cHTTP
 {
 private:
     struct sResponse
