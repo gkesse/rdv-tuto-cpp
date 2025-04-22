@@ -3,9 +3,11 @@
 /**/build/
 /**/github/
 /**/dev/
+/**/3party/*
 
 # files
 
 /**/~*
 /**/*.bak
 /**/*.tmp
+!/**/3party/CMakeLists.txt
